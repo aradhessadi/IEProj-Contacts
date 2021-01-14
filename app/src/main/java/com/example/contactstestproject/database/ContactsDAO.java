@@ -10,11 +10,14 @@ import com.example.contactstestproject.model.Contact;
 import java.util.List;
 
 @Dao
-public interface IContactsDao {
+public interface ContactsDAO {
 
     @Insert
     void insert (Contact contact);
 
     @Query("select * from contacts")
-    List<Contact> getList();
+    LiveData<List<Contact>> getList();
+
+    @Query("select * from contacts where name = :name")
+    LiveData<Contact> getContact(String name);
 }
