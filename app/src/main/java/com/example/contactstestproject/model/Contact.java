@@ -1,8 +1,15 @@
 package com.example.contactstestproject.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+
+@Entity(tableName = "contacts")
 public class Contact {
 
+    @ColumnInfo(name = "name")
     private String mName;
+
+    @ColumnInfo(name = "phone-number")
     private String mPhoneNumber;
 
     public String getName() {
