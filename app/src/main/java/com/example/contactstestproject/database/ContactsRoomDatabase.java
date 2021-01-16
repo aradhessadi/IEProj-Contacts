@@ -8,10 +8,16 @@ import androidx.room.RoomDatabase;
 
 import com.example.contactstestproject.model.Contact;
 
-@Database(entities = Contact.class , version = 1,exportSchema = false)
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+@Database(entities = Contact.class , version = 1)
 public abstract class ContactsRoomDatabase extends RoomDatabase {
 
-    private static final String DATABASE_NAME = "criminal_intent.db";
+    private static final String DATABASE_NAME = "contacts.db";
+    private static final int NUMBER_OF_THREADS = 1;
+
+    public static ExecutorService dataBaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     public abstract ContactsDAO getContactsDAO();
 
