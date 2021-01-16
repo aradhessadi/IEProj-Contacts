@@ -13,17 +13,14 @@ public class ContactViewViewModel extends AndroidViewModel {
 
     private LiveData<Contact> mContact;
     private ContactsRepository mRepository;
-    private Application mApplication;
 
     public ContactViewViewModel(@NonNull Application application) {
         super(application);
+        mRepository = ContactsRepository.getInstance(application.getApplicationContext());
     }
 
     public LiveData<Contact> getContactLiveData(){
         return null;
     }
 
-    public Contact getContact(){
-        return null;
-    }
 }

@@ -18,16 +18,8 @@ import java.util.List;
 public class ContactsListAdapter extends
         RecyclerView.Adapter<ContactsListAdapter.ContactsListHolder> {
 
-    private List<Contact> mContacts;
-    private Context mContext;
-
-    public List<Contact> getContacts() {
-        return mContacts;
-    }
-
-    public void setContacts(List<Contact> contacts) {
-        mContacts = contacts;
-    }
+    private final List<Contact> mContacts;
+    private final Context mContext;
 
     public ContactsListAdapter(Context context, List<Contact> contacts) {
         mContext = context;
@@ -59,7 +51,7 @@ public class ContactsListAdapter extends
     }
 
     public class ContactsListHolder extends RecyclerView.ViewHolder {
-        private RowContactsListBinding mRowContactsListBinding;
+        private final RowContactsListBinding mRowContactsListBinding;
 
         public ContactsListHolder(RowContactsListBinding rowContactsListBinding) {
             super(rowContactsListBinding.getRoot());
@@ -69,7 +61,6 @@ public class ContactsListAdapter extends
         public void bindProduct(int position) {
             Contact mContact = mContacts.get(position);
             mRowContactsListBinding.textViewName.setText(mContact.getName());
-            mRowContactsListBinding.textViewNumber.setText(mContact.getPhoneNumber());
         }
     }
 }
