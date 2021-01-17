@@ -27,6 +27,6 @@ public class ContactsListViewModel extends AndroidViewModel {
     }
 
     public void insertContacts() {
-        mRepository.setContactsList(mApplication.getApplicationContext());
+        mRepository.insertContacts(mApplication.getApplicationContext());
     }
 }
