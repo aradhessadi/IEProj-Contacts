@@ -67,6 +67,12 @@ public class ContactViewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mContactViewViewModel.insertContacts();
         mContactViewViewModel.getContactLiveData(mId).observe(this, new Observer<Contact>() {
             @Override
             public void onChanged(Contact contact) {

@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_item_back"
-        android:icon="@android:drawable/ic_menu_revert"
+        android:icon="@drawable/abc_vector_test"
         android:title="@string/back"
         app:showAsAction="ifRoom|withText" />
 </menu>
