@@ -1,4 +1,4 @@
-package com.example.contactstestproject.database;
+package com.example.contactstestproject.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

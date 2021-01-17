@@ -1,4 +1,4 @@
-package com.example.contactstestproject.view.fragment;
+package com.example.contactstestproject.ui.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.contactstestproject.R;
-import com.example.contactstestproject.adapter.ContactsListAdapter;
+import com.example.contactstestproject.ui.adapter.ContactsListAdapter;
 import com.example.contactstestproject.databinding.FragmentContactsListBinding;
 import com.example.contactstestproject.model.Contact;
 import com.example.contactstestproject.viewmodel.ContactsListViewModel;

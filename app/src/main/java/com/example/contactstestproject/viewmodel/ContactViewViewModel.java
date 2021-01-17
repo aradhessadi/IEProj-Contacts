@@ -5,10 +5,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
 import com.example.contactstestproject.model.Contact;
-import com.example.contactstestproject.repository.ContactsRepository;
+import com.example.contactstestproject.data.repository.ContactsRepository;
 
 public class ContactViewViewModel extends AndroidViewModel {
 

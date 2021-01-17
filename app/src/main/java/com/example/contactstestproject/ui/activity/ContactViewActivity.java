@@ -1,4 +1,4 @@
-package com.example.contactstestproject.view.activity;
+package com.example.contactstestproject.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.contactstestproject.view.fragment.ContactViewFragment;
+import com.example.contactstestproject.ui.fragment.ContactViewFragment;
 
 public class ContactViewActivity extends SingleFragmentActivity {
 

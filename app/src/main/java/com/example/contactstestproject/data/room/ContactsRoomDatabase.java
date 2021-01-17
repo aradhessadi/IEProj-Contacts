@@ -1,4 +1,4 @@
-package com.example.contactstestproject.database;
+package com.example.contactstestproject.data.room;
 
 import android.content.Context;
 
@@ -6,6 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.contactstestproject.data.ContactsDAO;
 import com.example.contactstestproject.model.Contact;
 
 import java.util.concurrent.ExecutorService;

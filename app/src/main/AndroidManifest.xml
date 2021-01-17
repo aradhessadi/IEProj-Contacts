@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.SingleFragmentActivity" />
-        <activity android:name=".view.activity.ContactViewActivity" />
-        <activity android:name=".view.activity.ContactsListActivity">
+        <activity android:name=".ui.activity.SingleFragmentActivity" />
+        <activity android:name=".ui.activity.ContactViewActivity" />
+        <activity android:name=".ui.activity.ContactsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

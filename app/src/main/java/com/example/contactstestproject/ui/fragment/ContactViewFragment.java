@@ -1,4 +1,4 @@
-package com.example.contactstestproject.view.fragment;
+package com.example.contactstestproject.ui.fragment;
 
 import android.os.Bundle;
 
@@ -17,7 +17,6 @@ import com.example.contactstestproject.R;
 import com.example.contactstestproject.databinding.FragmentContactViewBinding;
 import com.example.contactstestproject.model.Contact;
 import com.example.contactstestproject.viewmodel.ContactViewViewModel;
-import com.example.contactstestproject.viewmodel.ContactsListViewModel;
 
 import java.util.Objects;
 

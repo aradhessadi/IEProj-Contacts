@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.contactstestproject.model.Contact;
-import com.example.contactstestproject.repository.ContactsRepository;
+import com.example.contactstestproject.data.repository.ContactsRepository;
 
 import java.util.List;
 

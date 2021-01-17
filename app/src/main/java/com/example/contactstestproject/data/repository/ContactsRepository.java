@@ -1,19 +1,15 @@
-package com.example.contactstestproject.repository;
+package com.example.contactstestproject.data.repository;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.Cursor;
-import android.provider.ContactsContract;
 
 import androidx.lifecycle.LiveData;
 
 
-import com.example.contactstestproject.database.ContactsDAO;
-import com.example.contactstestproject.database.ContactsRoomDatabase;
+import com.example.contactstestproject.data.ContactsDAO;
+import com.example.contactstestproject.data.room.ContactsRoomDatabase;
 import com.example.contactstestproject.model.Contact;
 import com.example.contactstestproject.utils.ContactSyncUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactsRepository implements IContactsRepository {
