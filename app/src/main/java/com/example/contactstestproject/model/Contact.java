@@ -8,12 +8,11 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "contacts")
 public class Contact {
 
-
+    @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "Id")
     private String mID;
 
-    @PrimaryKey
-    @NonNull
     @ColumnInfo(name = "name")
     private String mName;
 
@@ -44,7 +43,8 @@ public class Contact {
         this.mPhoneNumber = mPhoneNumber;
     }
 
-    public Contact(){}
+    public Contact() {
+    }
 
     public Contact(String ID, String mName, String mPhoneNumber) {
         this.mID = ID;

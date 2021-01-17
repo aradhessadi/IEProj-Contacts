@@ -58,6 +58,7 @@ public class ContactsListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mContactsListViewModel.insertContacts();
         mContactsListViewModel.getContactsLiveData().observe(this, new Observer<List<Contact>>() {
             @Override
             public void onChanged(List<Contact> contacts) {

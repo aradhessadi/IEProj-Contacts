@@ -31,12 +31,14 @@ public class ContactsRepository implements IContactsRepository {
         mContactsDAO = contactsRoomDatabase.getContactsDAO();
     }
 
+    @Override
     public LiveData<List<Contact>> getContactsLiveData() {
         return mContactsDAO.getList();
     }
 
-    public LiveData<Contact> getContactLiveData(String ID) {
-        return mContactsDAO.getContact(ID);
+    @Override
+    public LiveData<Contact> getContactLiveData(String id) {
+        return mContactsDAO.getContact(id);
     }
 
     public void insert(final Contact contact) {

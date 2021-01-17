@@ -11,13 +11,12 @@ import com.example.contactstestproject.model.Contact;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = Contact.class , version = 1)
+@Database(entities = Contact.class, version = 1, exportSchema = false)
 public abstract class ContactsRoomDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "contacts.db";
-    private static final int NUMBER_OF_THREADS = 1;
 
-    public static ExecutorService dataBaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    public static ExecutorService dataBaseWriteExecutor = Executors.newSingleThreadExecutor();
 
     public abstract ContactsDAO getContactsDAO();
 

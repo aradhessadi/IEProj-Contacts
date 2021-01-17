@@ -2,7 +2,6 @@ package com.example.contactstestproject.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Ignore;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -20,6 +19,6 @@ public interface ContactsDAO {
     @Query("select * from contacts")
     LiveData<List<Contact>> getList();
 
-    @Query("select * from contacts where name = :name")
-    LiveData<Contact> getContact(String name);
+    @Query("select * from contacts where Id = :id")
+    LiveData<Contact> getContact(String id);
 }
