@@ -11,7 +11,7 @@ public class Contact {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "Id")
-    private String mID;
+    private String mId;
 
     @ColumnInfo(name = "name")
     private String mName;
@@ -19,12 +19,12 @@ public class Contact {
     @ColumnInfo(name = "phone-number")
     private String mPhoneNumber;
 
-    public String getID() {
-        return mID;
+    public String getId() {
+        return mId;
     }
 
-    public void setID(String ID) {
-        this.mName = mID;
+    public void setId(String id) {
+        this.mName = mId;
     }
 
     public String getName() {
@@ -43,11 +43,8 @@ public class Contact {
         this.mPhoneNumber = mPhoneNumber;
     }
 
-    public Contact() {
-    }
-
-    public Contact(String ID, String mName, String mPhoneNumber) {
-        this.mID = ID;
+    public Contact(@NonNull String id, String mName, String mPhoneNumber) {
+        this.mId = id;
         this.mName = mName;
         this.mPhoneNumber = mPhoneNumber;
     }

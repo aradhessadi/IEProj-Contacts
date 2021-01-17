@@ -66,7 +66,7 @@ public class ContactsListAdapter extends
             mRowContactsListBinding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = ContactViewActivity.newIntent(mContext, "11");
+                    Intent intent = ContactViewActivity.newIntent(mContext, mContact.getId());
                     mContext.startActivity(intent);
                 }
             });
