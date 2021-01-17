@@ -2,9 +2,11 @@ package com.example.contactstestproject.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -21,8 +23,12 @@ import java.util.List;
 public class ContactsListAdapter extends
         RecyclerView.Adapter<ContactsListAdapter.ContactsListHolder> {
 
-    private final List<Contact> mContacts;
+    private List<Contact> mContacts;
     private final Context mContext;
+
+    public void setContacts(List<Contact> mContacts) {
+        this.mContacts = mContacts;
+    }
 
     public ContactsListAdapter(Context context, List<Contact> contacts) {
         mContext = context;
@@ -62,7 +68,7 @@ public class ContactsListAdapter extends
             mRowContactsListBinding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = ContactViewActivity.newIntent(mContext, mContact.getID());
+                    Intent intent = ContactViewActivity.newIntent(mContext, "11");
                     mContext.startActivity(intent);
                 }
             });

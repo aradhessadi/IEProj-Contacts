@@ -85,6 +85,7 @@ public class ContactsListFragment extends Fragment {
             mContactsListAdapter = new ContactsListAdapter(getContext(), contacts);
             mFragmentContactsListBinding.ContactsList.setAdapter(mContactsListAdapter);
         } else {
+            mContactsListAdapter.setContacts(contacts);
             mContactsListAdapter.notifyDataSetChanged();
         }
     }

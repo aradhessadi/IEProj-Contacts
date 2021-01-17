@@ -13,7 +13,7 @@ import java.util.List;
 public class ContactSyncUtils {
 
     private final Context mContext;
-    private List<Contact> mContacts;
+    private final List<Contact> mContacts;
 
     public ContactSyncUtils(Context context) {
         mContext = context;
@@ -22,32 +22,35 @@ public class ContactSyncUtils {
     }
 
     private void sync() {
-        ContentResolver cr = mContext.getContentResolver();
-        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+        ContentResolver contentResolver = mContext.getContentResolver();
+        Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, ContactsContract.Contacts.DISPLAY_NAME);
-        if ((cur != null ? cur.getCount() : 0) > 0) {
-            while (cur != null && cur.moveToNext()) {
-                String id = cur.getString(
-                        cur.getColumnIndex(ContactsContract.Contacts._ID));
-                String name = cur.getString(cur.getColumnIndex(
+
+        if ((cursor != null ? cursor.getCount() : 0) > 0) {
+            while (cursor != null && cursor.moveToNext()) {
+                String id = cursor.getString(
+                        cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                String name = cursor.getString(cursor.getColumnIndex(
                         ContactsContract.Contacts.DISPLAY_NAME));
-                if (cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
-                    Cursor pCur = cr.query(
+                String phoneNo = "no number";
+                if (cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                    Cursor pCur = contentResolver.query(
                             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                             null,
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
                             new String[]{id}, null);
                     while (pCur.moveToNext()) {
-                        String phoneNo = pCur.getString(pCur.getColumnIndex(
+                        phoneNo = pCur.getString(pCur.getColumnIndex(
                                 ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        mContacts.add(new Contact(id, name, phoneNo));
+
                     }
                     pCur.close();
                 }
+                mContacts.add(new Contact(id, name, phoneNo));
             }
         }
-        if (cur != null) {
-            cur.close();
+        if (cursor != null) {
+            cursor.close();
         }
     }
 

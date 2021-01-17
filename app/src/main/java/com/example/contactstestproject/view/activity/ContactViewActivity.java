@@ -11,17 +11,15 @@ import com.example.contactstestproject.view.fragment.ContactViewFragment;
 public class ContactViewActivity extends SingleFragmentActivity {
 
     public static final String EXTRA_ID = "EXTRA_ID";
-    private String mId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mId = getIntent().getStringExtra(EXTRA_ID);
     }
 
     @Override
     public Fragment createFragment() {
-        return ContactViewFragment.newInstance(mId);
+        return ContactViewFragment.newInstance(getIntent().getStringExtra(EXTRA_ID));
     }
 
     public static Intent newIntent(Context context, String id) {
