@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ContactsTestProject</string>
+    <string name="back">back</string>
 </resources>
