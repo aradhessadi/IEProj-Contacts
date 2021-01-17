@@ -64,6 +64,8 @@ public class ContactViewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initData(mContactViewViewModel.getContact(mId));
+
         mContactViewViewModel.getContactLiveData(mId).observe(this, new Observer<Contact>() {
             @Override
             public void onChanged(Contact contact) {

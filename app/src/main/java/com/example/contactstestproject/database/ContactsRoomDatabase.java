@@ -17,7 +17,7 @@ public abstract class ContactsRoomDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "contacts.db";
     private static final int NUMBER_OF_THREADS = 2;
 
-    public static ExecutorService dataBaseWriteExecutor = Executors.newFixedThreadPool(2);
+    public static ExecutorService dataBaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     public abstract ContactsDAO getContactsDAO();
 

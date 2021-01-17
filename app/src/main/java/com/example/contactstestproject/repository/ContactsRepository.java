@@ -39,6 +39,11 @@ public class ContactsRepository implements IContactsRepository {
 
     @Override
     public LiveData<Contact> getContactLiveData(String id) {
+        return mContactsDAO.getContactLiveData(id);
+    }
+
+    @Override
+    public Contact getContact(String id) {
         return mContactsDAO.getContact(id);
     }
 
