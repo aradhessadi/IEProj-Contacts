@@ -3,6 +3,7 @@ package com.example.contactstestproject.data.repository;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 
 import com.example.contactstestproject.data.ContactsDAO;
@@ -36,13 +37,18 @@ public class ContactsRepository implements IContactsRepository {
     }
 
     @Override
-    public LiveData<Contact> getContactLiveData(String id) {
-        return mContactsDAO.getContactLiveData(id);
-    }
-
-    @Override
-    public Contact getContact(String id) {
-        return mContactsDAO.getContact(id);
+    public LiveData<Contact> getContactLiveData(final String id) {
+        final MutableLiveData<Contact> liveData = new MutableLiveData<>();
+        ContactsRoomDatabase.dataBaseWriteExecutor.execute(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Contact contact = mContactsDAO.getContact(id);
+                        liveData.postValue(contact);
+                    }
+                }
+        );
+        return liveData;
     }
 
     @Override

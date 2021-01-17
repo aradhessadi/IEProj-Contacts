@@ -24,8 +24,4 @@ public class ContactViewViewModel extends AndroidViewModel {
     public LiveData<Contact> getContactLiveData(String id){
         return mRepository.getContactLiveData(id);
     }
-
-    public Contact getContact(String id){
-        return mRepository.getContact(id);
-    }
 }

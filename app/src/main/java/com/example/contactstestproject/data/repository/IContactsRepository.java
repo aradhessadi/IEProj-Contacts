@@ -12,7 +12,5 @@ public interface IContactsRepository {
 
     LiveData<Contact> getContactLiveData(String id);
 
-    Contact getContact(String id);
-
     void clear();
 }
