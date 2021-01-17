@@ -12,6 +12,7 @@ import com.example.contactstestproject.database.ContactsDAO;
 import com.example.contactstestproject.database.ContactsRoomDatabase;
 import com.example.contactstestproject.model.Contact;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContactsRepository implements IContactsRepository {
@@ -41,34 +42,58 @@ public class ContactsRepository implements IContactsRepository {
         return mContactsDAO.getContact(id);
     }
 
-    public void insert(final Contact contact) {
+    @Override
+    public void clear() {
+        mContactsDAO.clear();
+    }
+
+    public void insertContacts(final List<Contact> contacts) {
         ContactsRoomDatabase.dataBaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                mContactsDAO.insert(contact);
+                clear();
+                mContactsDAO.insertContacts(contacts.toArray(new Contact[]{}));
             }
         });
     }
 
-    public void setContactsList(Context context) {
-        /*ContentResolver contentResolver = context.getContentResolver();
-        Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null,
-                null, null,
-                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
-        while (cursor != null && cursor.moveToNext()) {
-            String Id = cursor.getString(
-                    cursor.getColumnIndex(ContactsContract.Contacts._ID));
-            String name = cursor.getString(cursor.getColumnIndex(
-                    ContactsContract.Contacts.DISPLAY_NAME));
-            *//*String number = cursor.getString(cursor.getColumnIndex(
-                    ContactsContract.CommonDataKinds.Phone.NUMBER));*//*
-            mContactsDAO.insert(new Contact("4", name, "00"));
-        }
-        if (cursor != null) {
-            cursor.close();
-        }*/
+    public void setContactsList(final Context context) {
 
-        insert(new Contact("d", "y", "6"));
-        insert(new Contact("3", "3", "7"));
+        final ArrayList<Contact> contacts = new ArrayList<>();
+        ContactsRoomDatabase.dataBaseWriteExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+
+                ContentResolver cr = context.getContentResolver();
+                Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
+                        null, null, null, null);
+                if ((cur != null ? cur.getCount() : 0) > 0) {
+                    while (cur != null && cur.moveToNext()) {
+                        String id = cur.getString(
+                                cur.getColumnIndex(ContactsContract.Contacts._ID));
+                        String name = cur.getString(cur.getColumnIndex(
+                                ContactsContract.Contacts.DISPLAY_NAME));
+                        /*nameList.add(name);*/
+                        if (cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                            Cursor pCur = cr.query(
+                                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                                    null,
+                                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                                    new String[]{id}, null);
+                            while (pCur.moveToNext()) {
+                                String phoneNo = pCur.getString(pCur.getColumnIndex(
+                                        ContactsContract.CommonDataKinds.Phone.NUMBER));
+                                contacts.add(new Contact(id, name, phoneNo));
+                            }
+                            pCur.close();
+                        }
+                    }
+                }
+                if (cur != null) {
+                    cur.close();
+                }
+                insertContacts(contacts);
+            }
+        });
     }
 }

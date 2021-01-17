@@ -13,8 +13,11 @@ import java.util.List;
 @Dao
 public interface ContactsDAO {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert (Contact contact);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertContacts (Contact... contacts);
+
+    @Query("delete from contacts")
+    void clear();
 
     @Query("select * from contacts")
     LiveData<List<Contact>> getList();
