@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.SingleFragmentActivity" />
-        <activity android:name=".ui.activity.ContactViewActivity" />
+        <activity android:name=".ui.activity.ContactDetailActivity" />
         <activity android:name=".ui.activity.ContactsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

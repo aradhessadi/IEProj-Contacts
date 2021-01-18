@@ -10,7 +10,7 @@ public class Contact {
 
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "Id")
+    @ColumnInfo(name = "id")
     private String mId;
 
     @ColumnInfo(name = "name")

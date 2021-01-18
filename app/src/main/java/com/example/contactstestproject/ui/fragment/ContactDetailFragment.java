@@ -17,25 +17,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.contactstestproject.R;
-import com.example.contactstestproject.databinding.FragmentContactViewBinding;
+import com.example.contactstestproject.databinding.FragmentContactDetailBinding;
 import com.example.contactstestproject.model.Contact;
-import com.example.contactstestproject.viewmodel.ContactViewViewModel;
+import com.example.contactstestproject.viewmodel.ContactDetailViewModel;
 
 import java.util.Objects;
 
-public class ContactViewFragment extends Fragment {
+public class ContactDetailFragment extends Fragment {
 
-    private ContactViewViewModel mContactViewViewModel;
-    private FragmentContactViewBinding mFragmentContactViewBinding;
+    private ContactDetailViewModel mContactDetailViewModel;
+    private FragmentContactDetailBinding mFragmentContactViewBinding;
     public static final String ARGS_ID = "ARGS_ID";
     private String mId;
 
-    public ContactViewFragment() {
+    public ContactDetailFragment() {
         // Required empty public constructor
     }
 
-    public static ContactViewFragment newInstance(String id) {
-        ContactViewFragment fragment = new ContactViewFragment();
+    public static ContactDetailFragment newInstance(String id) {
+        ContactDetailFragment fragment = new ContactDetailFragment();
         Bundle args = new Bundle();
         args.putString(ARGS_ID, id);
         fragment.setArguments(args);
@@ -45,35 +45,35 @@ public class ContactViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContactViewViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
+        mContactDetailViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
                 .getInstance(Objects.requireNonNull(getActivity()).getApplication()))
-                .get(ContactViewViewModel.class);
+                .get(ContactDetailViewModel.class);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mFragmentContactViewBinding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.fragment_contact_view,
+                R.layout.fragment_contact_detail,
                 container,
                 false);
-        mId = getArguments().getString(ARGS_ID);
         return mFragmentContactViewBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mId = getArguments().getString(ARGS_ID);
         setHasOptionsMenu(true);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mContactViewViewModel.insertContacts();
-        mContactViewViewModel.getContactLiveData(mId).observe(this, new Observer<Contact>() {
+        mContactDetailViewModel.insertContacts();
+        mContactDetailViewModel.getContactLiveData(mId).observe(this, new Observer<Contact>() {
             @Override
             public void onChanged(Contact contact) {
                 initData(contact);

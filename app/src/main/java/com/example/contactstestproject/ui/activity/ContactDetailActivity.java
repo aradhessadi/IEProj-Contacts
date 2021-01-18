@@ -6,9 +6,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.contactstestproject.ui.fragment.ContactViewFragment;
+import com.example.contactstestproject.ui.fragment.ContactDetailFragment;
 
-public class ContactViewActivity extends SingleFragmentActivity {
+public class ContactDetailActivity extends SingleFragmentActivity {
 
     public static final String EXTRA_ID = "EXTRA_ID";
 
@@ -19,11 +19,11 @@ public class ContactViewActivity extends SingleFragmentActivity {
 
     @Override
     public Fragment createFragment() {
-        return ContactViewFragment.newInstance(getIntent().getStringExtra(EXTRA_ID));
+        return ContactDetailFragment.newInstance(getIntent().getStringExtra(EXTRA_ID));
     }
 
     public static Intent newIntent(Context context, String id) {
-        Intent intent = new Intent(context, ContactViewActivity.class);
+        Intent intent = new Intent(context, ContactDetailActivity.class);
         intent.putExtra(EXTRA_ID, id);
         return intent;
     }
