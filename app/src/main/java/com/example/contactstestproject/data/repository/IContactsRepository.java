@@ -13,4 +13,6 @@ public interface IContactsRepository {
     LiveData<Contact> getContactLiveData(String id);
 
     void clear();
+
+    void insertContacts();
 }

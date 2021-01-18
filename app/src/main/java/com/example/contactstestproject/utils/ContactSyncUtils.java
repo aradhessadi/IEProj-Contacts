@@ -10,6 +10,11 @@ import com.example.contactstestproject.model.Contact;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+this class contains logic for getting contacts from content resolver
+and creates a array list to insert in database
+ */
+
 public class ContactSyncUtils {
 
     private final Context mContext;

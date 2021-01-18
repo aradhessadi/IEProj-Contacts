@@ -5,21 +5,20 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.contactstestproject.model.Contact;
 import com.example.contactstestproject.data.repository.ContactsRepository;
+import com.example.contactstestproject.utils.ApplicationUtils;
 
 import java.util.List;
 
-public class ContactsListViewModel extends AndroidViewModel {
+public class ContactsListViewModel extends ViewModel {
 
     private final ContactsRepository mRepository;
-    private final Application mApplication;
 
-    public ContactsListViewModel(@NonNull Application application) {
-        super(application);
-        mApplication = application;
-        mRepository = ContactsRepository.getInstance(application.getApplicationContext());
+    public ContactsListViewModel() {
+        mRepository = ContactsRepository.getInstance();
     }
 
     public LiveData<List<Contact>> getContactsLiveData() {
@@ -27,6 +26,6 @@ public class ContactsListViewModel extends AndroidViewModel {
     }
 
     public void insertContacts() {
-        mRepository.insertContacts(mApplication.getApplicationContext());
+        mRepository.insertContacts();
     }
 }

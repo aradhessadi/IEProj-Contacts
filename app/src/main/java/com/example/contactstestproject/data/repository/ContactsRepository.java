@@ -1,14 +1,12 @@
 package com.example.contactstestproject.data.repository;
 
-import android.content.Context;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 
 import com.example.contactstestproject.data.ContactsDAO;
 import com.example.contactstestproject.data.room.ContactsRoomDatabase;
 import com.example.contactstestproject.model.Contact;
+import com.example.contactstestproject.utils.ApplicationUtils;
 import com.example.contactstestproject.utils.ContactSyncUtils;
 
 import java.util.List;
@@ -19,15 +17,15 @@ public class ContactsRepository implements IContactsRepository {
     private final ContactsDAO mContactsDAO;
     private ContactSyncUtils mContactSyncUtils;
 
-    public static ContactsRepository getInstance(Context context) {
+    public static ContactsRepository getInstance() {
         if (sRepository == null)
-            sRepository = new ContactsRepository(context);
+            sRepository = new ContactsRepository();
 
         return sRepository;
     }
 
-    private ContactsRepository(Context context) {
-        ContactsRoomDatabase contactsRoomDatabase = ContactsRoomDatabase.getDatabase(context);
+    private ContactsRepository() {
+        ContactsRoomDatabase contactsRoomDatabase = ContactsRoomDatabase.getDatabase(ApplicationUtils.getContext());
         mContactsDAO = contactsRoomDatabase.getContactsDAO();
     }
 
@@ -56,8 +54,9 @@ public class ContactsRepository implements IContactsRepository {
         mContactsDAO.clear();
     }
 
-    public void insertContacts(Context context) {
-        mContactSyncUtils = new ContactSyncUtils(context);
+    @Override
+    public void insertContacts() {
+        mContactSyncUtils = new ContactSyncUtils(ApplicationUtils.getContext());
         ContactsRoomDatabase.dataBaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
