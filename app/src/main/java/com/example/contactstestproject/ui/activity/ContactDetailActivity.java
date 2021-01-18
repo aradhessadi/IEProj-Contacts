@@ -1,4 +1,4 @@
-package com.example.contactstestproject.view.activity;
+package com.example.contactstestproject.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,26 +6,24 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.contactstestproject.view.fragment.ContactViewFragment;
+import com.example.contactstestproject.ui.fragment.ContactDetailFragment;
 
-public class ContactViewActivity extends SingleFragmentActivity {
+public class ContactDetailActivity extends SingleFragmentActivity {
 
     public static final String EXTRA_ID = "EXTRA_ID";
-    private String mId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mId = getIntent().getStringExtra(EXTRA_ID);
     }
 
     @Override
     public Fragment createFragment() {
-        return ContactViewFragment.newInstance(mId);
+        return ContactDetailFragment.newInstance(getIntent().getStringExtra(EXTRA_ID));
     }
 
     public static Intent newIntent(Context context, String id) {
-        Intent intent = new Intent(context, ContactViewActivity.class);
+        Intent intent = new Intent(context, ContactDetailActivity.class);
         intent.putExtra(EXTRA_ID, id);
         return intent;
     }

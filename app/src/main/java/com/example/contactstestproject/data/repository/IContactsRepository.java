@@ -1,4 +1,4 @@
-package com.example.contactstestproject.repository;
+package com.example.contactstestproject.data.repository;
 
 import androidx.lifecycle.LiveData;
 
@@ -12,7 +12,7 @@ public interface IContactsRepository {
 
     LiveData<Contact> getContactLiveData(String id);
 
-    Contact getContact(String id);
-
     void clear();
+
+    void insertContacts();
 }

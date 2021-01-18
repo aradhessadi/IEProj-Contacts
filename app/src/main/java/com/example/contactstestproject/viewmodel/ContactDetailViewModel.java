@@ -6,18 +6,16 @@ import androidx.lifecycle.ViewModel;
 import com.example.contactstestproject.data.repository.ContactsRepository;
 import com.example.contactstestproject.model.Contact;
 
-import java.util.List;
-
-public class ContactsListViewModel extends ViewModel {
+public class ContactDetailViewModel extends ViewModel {
 
     private final ContactsRepository mRepository;
 
-    public ContactsListViewModel() {
+    public ContactDetailViewModel() {
         mRepository = ContactsRepository.getInstance();
     }
 
-    public LiveData<List<Contact>> getContactsLiveData() {
-        return mRepository.getContactsLiveData();
+    public LiveData<Contact> getContactLiveData(String id) {
+        return mRepository.getContactLiveData(id);
     }
 
     public void insertContacts() {

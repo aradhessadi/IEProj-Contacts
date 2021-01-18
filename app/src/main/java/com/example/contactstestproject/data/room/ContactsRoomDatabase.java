@@ -1,4 +1,4 @@
-package com.example.contactstestproject.database;
+package com.example.contactstestproject.data.room;
 
 import android.content.Context;
 
@@ -6,6 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.contactstestproject.data.ContactsDAO;
 import com.example.contactstestproject.model.Contact;
 
 import java.util.concurrent.ExecutorService;
@@ -15,9 +16,8 @@ import java.util.concurrent.Executors;
 public abstract class ContactsRoomDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "contacts.db";
-    private static final int NUMBER_OF_THREADS = 2;
 
-    public static ExecutorService dataBaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    public static ExecutorService dataBaseWriteExecutor = Executors.newSingleThreadExecutor();
 
     public abstract ContactsDAO getContactsDAO();
 

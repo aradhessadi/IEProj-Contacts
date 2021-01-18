@@ -1,4 +1,4 @@
-package com.example.contactstestproject.database;
+package com.example.contactstestproject.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -22,9 +22,6 @@ public interface ContactsDAO {
     @Query("select * from contacts")
     LiveData<List<Contact>> getList();
 
-    @Query("select * from contacts where Id = :id")
-    LiveData<Contact> getContactLiveData(String id);
-
-    @Query("select * from contacts where Id = :id")
+    @Query("select * from contacts where id = :id")
     Contact getContact(String id);
 }

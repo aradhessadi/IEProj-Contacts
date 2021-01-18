@@ -1,4 +1,4 @@
-package com.example.contactstestproject.adapter;
+package com.example.contactstestproject.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.contactstestproject.R;
 import com.example.contactstestproject.databinding.RowContactsListBinding;
 import com.example.contactstestproject.model.Contact;
-import com.example.contactstestproject.view.activity.ContactViewActivity;
+import com.example.contactstestproject.ui.activity.ContactDetailActivity;
 
 import java.util.List;
 
@@ -21,12 +21,22 @@ import java.util.List;
 public class ContactsListAdapter extends
         RecyclerView.Adapter<ContactsListAdapter.ContactsListHolder> {
 
-    private final List<Contact> mContacts;
+    private List<Contact> mContacts;
     private final Context mContext;
+
+    public void setContacts(List<Contact> mContacts) {
+        this.mContacts = mContacts;
+    }
 
     public ContactsListAdapter(Context context, List<Contact> contacts) {
         mContext = context;
         mContacts = contacts;
+    }
+
+    public void updateAdapter(List<Contact> contacts) {
+        mContacts.clear();
+        mContacts.addAll(contacts);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -62,7 +72,7 @@ public class ContactsListAdapter extends
             mRowContactsListBinding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = ContactViewActivity.newIntent(mContext, mContact.getID());
+                    Intent intent = ContactDetailActivity.newIntent(mContext, mContact.getId());
                     mContext.startActivity(intent);
                 }
             });
