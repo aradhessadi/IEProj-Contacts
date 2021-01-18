@@ -97,6 +97,8 @@ public class ContactViewFragment extends Fragment {
 
     private void initData(Contact contact) {
         mFragmentContactViewBinding.name.setText(contact.getName());
-        mFragmentContactViewBinding.number.setText(contact.getPhoneNumber());
+        mFragmentContactViewBinding.number
+                .setText(String.format(getString(R.string.number_contact_detail),
+                        contact.getPhoneNumber()));
     }
 }

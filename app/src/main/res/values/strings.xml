@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ContactsTestProject</string>
     <string name="back">back</string>
+    <string name="number_contact_detail">number : %s</string>
+    <string name="contact_info">Contact Info</string>
+    <string name="place_holder">place_holder</string>
 </resources>
