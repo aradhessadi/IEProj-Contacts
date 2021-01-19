@@ -61,6 +61,7 @@ public class ContactsRepository implements IContactsRepository {
             @Override
             public void run() {
                 clear();
+                mContactSyncUtils.sync();
                 mContactsDAO.insertContacts(mContactSyncUtils.getContacts().toArray(new Contact[]{}));
             }
         });

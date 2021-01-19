@@ -23,10 +23,9 @@ public class ContactSyncUtils {
     public ContactSyncUtils(Context context) {
         mContext = context;
         mContacts = new ArrayList<>();
-        sync();
     }
 
-    private void sync() {
+    public void sync() {
         ContentResolver contentResolver = mContext.getContentResolver();
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, ContactsContract.Contacts.DISPLAY_NAME);
