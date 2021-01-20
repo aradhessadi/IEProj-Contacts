@@ -8,6 +8,7 @@ import com.example.contactstestproject.data.room.ContactsRoomDatabase;
 import com.example.contactstestproject.model.Contact;
 import com.example.contactstestproject.utils.ApplicationUtils;
 import com.example.contactstestproject.utils.ContactSyncUtils;
+import com.example.contactstestproject.utils.ThreadUtils;
 
 import java.util.List;
 
@@ -15,18 +16,18 @@ public class ContactsRepository implements IContactsRepository {
 
     private static ContactsRepository sRepository;
     private final ContactsDAO mContactsDAO;
-    private ContactSyncUtils mContactSyncUtils;
+    private final ContactSyncUtils mContactSyncUtils;
 
     public static ContactsRepository getInstance() {
         if (sRepository == null)
             sRepository = new ContactsRepository();
-
         return sRepository;
     }
 
     private ContactsRepository() {
         ContactsRoomDatabase contactsRoomDatabase = ContactsRoomDatabase.getDatabase(ApplicationUtils.getContext());
         mContactsDAO = contactsRoomDatabase.getContactsDAO();
+        mContactSyncUtils = new ContactSyncUtils(ApplicationUtils.getContext());
     }
 
     @Override
@@ -37,7 +38,8 @@ public class ContactsRepository implements IContactsRepository {
     @Override
     public LiveData<Contact> getContactLiveData(final String id) {
         final MutableLiveData<Contact> liveData = new MutableLiveData<>();
-        ContactsRoomDatabase.dataBaseWriteExecutor.execute(
+
+        ThreadUtils.dataBaseWriteExecutor.execute(
                 new Runnable() {
                     @Override
                     public void run() {
@@ -56,8 +58,7 @@ public class ContactsRepository implements IContactsRepository {
 
     @Override
     public void insertContacts() {
-        mContactSyncUtils = new ContactSyncUtils(ApplicationUtils.getContext());
-        ContactsRoomDatabase.dataBaseWriteExecutor.execute(new Runnable() {
+        ThreadUtils.dataBaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 clear();

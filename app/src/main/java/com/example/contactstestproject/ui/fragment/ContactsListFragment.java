@@ -28,12 +28,7 @@ public class ContactsListFragment extends Fragment {
     private ContactsListAdapter mContactsListAdapter;
     private ContactsListViewModel mContactsListViewModel;
 
-    public ContactsListFragment() {
-    }
-
-    public static ContactsListFragment newInstance() {
-        return new ContactsListFragment();
-    }
+    public ContactsListFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,5 +78,9 @@ public class ContactsListFragment extends Fragment {
         } else {
             mContactsListAdapter.updateAdapter(contacts);
         }
+    }
+
+    public static ContactsListFragment newInstance() {
+        return new ContactsListFragment();
     }
 }

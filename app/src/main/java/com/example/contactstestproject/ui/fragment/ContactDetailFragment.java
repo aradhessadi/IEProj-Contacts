@@ -30,17 +30,7 @@ public class ContactDetailFragment extends Fragment {
     private FragmentContactDetailBinding mFragmentContactViewBinding;
     public static final String ARGS_CONTACT = "ARGS_CONTACT";
 
-    public ContactDetailFragment() {
-        // Required empty public constructor
-    }
-
-    public static ContactDetailFragment newInstance(Serializable serializable) {
-        ContactDetailFragment fragment = new ContactDetailFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARGS_CONTACT, serializable);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    public ContactDetailFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,5 +91,13 @@ public class ContactDetailFragment extends Fragment {
         mFragmentContactViewBinding.number
                 .setText(String.format(getString(R.string.number_contact_detail),
                         contact.getPhoneNumber()));
+    }
+
+    public static ContactDetailFragment newInstance(Serializable serializable) {
+        ContactDetailFragment fragment = new ContactDetailFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARGS_CONTACT, serializable);
+        fragment.setArguments(args);
+        return fragment;
     }
 }
