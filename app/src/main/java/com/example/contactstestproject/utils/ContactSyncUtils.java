@@ -1,15 +1,9 @@
 package com.example.contactstestproject.utils;
 
-import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.os.Looper;
 import android.provider.ContactsContract;
-import android.widget.Toast;
-
-import androidx.core.content.ContextCompat;
 
 import com.example.contactstestproject.model.Contact;
 
@@ -18,7 +12,7 @@ import java.util.List;
 
 /*
 this class contains logic for getting contacts from content resolver
-and creates a array list to insert in database
+and creates an array list to insert in database
  */
 
 public class ContactSyncUtils {
@@ -32,7 +26,7 @@ public class ContactSyncUtils {
     }
 
     public void sync() {
-        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+        if (ContactPermissionUtils.isGranted()) {
             ContentResolver contentResolver = mContext.getContentResolver();
             Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,
                     null, null, null, ContactsContract.Contacts.DISPLAY_NAME);
@@ -64,7 +58,7 @@ public class ContactSyncUtils {
                 cursor.close();
             }
         } else {
-            //todo add a dialog fragment for asking permission
+            System.exit(0);
         }
     }
 

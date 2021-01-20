@@ -25,7 +25,8 @@ public class ContactsRepository implements IContactsRepository {
     }
 
     private ContactsRepository() {
-        ContactsRoomDatabase contactsRoomDatabase = ContactsRoomDatabase.getDatabase(ApplicationUtils.getContext());
+        ContactsRoomDatabase contactsRoomDatabase = ContactsRoomDatabase.
+                getDatabase(ApplicationUtils.getContext());
         mContactsDAO = contactsRoomDatabase.getContactsDAO();
         mContactSyncUtils = new ContactSyncUtils(ApplicationUtils.getContext());
     }
