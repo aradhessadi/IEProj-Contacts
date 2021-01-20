@@ -6,11 +6,12 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.contactstestproject.model.Contact;
 import com.example.contactstestproject.ui.fragment.ContactDetailFragment;
 
 public class ContactDetailActivity extends SingleFragmentActivity {
 
-    public static final String EXTRA_ID = "EXTRA_ID";
+    public static final String EXTRA_CONTACT = "EXTRA_CONTACT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +20,12 @@ public class ContactDetailActivity extends SingleFragmentActivity {
 
     @Override
     public Fragment createFragment() {
-        return ContactDetailFragment.newInstance(getIntent().getStringExtra(EXTRA_ID));
+        return ContactDetailFragment.newInstance(getIntent().getSerializableExtra(EXTRA_CONTACT));
     }
 
-    public static Intent newIntent(Context context, String id) {
+    public static Intent newIntent(Context context, Contact contact) {
         Intent intent = new Intent(context, ContactDetailActivity.class);
-        intent.putExtra(EXTRA_ID, id);
+        intent.putExtra(EXTRA_CONTACT, contact);
         return intent;
     }
 }

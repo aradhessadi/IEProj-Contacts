@@ -21,26 +21,16 @@ import com.example.contactstestproject.databinding.FragmentContactDetailBinding;
 import com.example.contactstestproject.model.Contact;
 import com.example.contactstestproject.viewmodel.ContactDetailViewModel;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 public class ContactDetailFragment extends Fragment {
 
     private ContactDetailViewModel mContactDetailViewModel;
     private FragmentContactDetailBinding mFragmentContactViewBinding;
-    public static final String ARGS_ID = "ARGS_ID";
-    private String mId;
+    public static final String ARGS_CONTACT = "ARGS_CONTACT";
 
-    public ContactDetailFragment() {
-        // Required empty public constructor
-    }
-
-    public static ContactDetailFragment newInstance(String id) {
-        ContactDetailFragment fragment = new ContactDetailFragment();
-        Bundle args = new Bundle();
-        args.putString(ARGS_ID, id);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    public ContactDetailFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +55,14 @@ public class ContactDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mId = getArguments().getString(ARGS_ID);
+        Contact contact = (Contact) getArguments().getSerializable(ARGS_CONTACT);
+        initData(contact);
+        mContactDetailViewModel.getContactLiveData(contact.getId()).observe(this, new Observer<Contact>() {
+            @Override
+            public void onChanged(Contact contact) {
+                initData(contact);
+            }
+        });
         setHasOptionsMenu(true);
     }
 
@@ -73,12 +70,6 @@ public class ContactDetailFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mContactDetailViewModel.insertContacts();
-        mContactDetailViewModel.getContactLiveData(mId).observe(this, new Observer<Contact>() {
-            @Override
-            public void onChanged(Contact contact) {
-                initData(contact);
-            }
-        });
     }
 
     @Override
@@ -100,5 +91,13 @@ public class ContactDetailFragment extends Fragment {
         mFragmentContactViewBinding.number
                 .setText(String.format(getString(R.string.number_contact_detail),
                         contact.getPhoneNumber()));
+    }
+
+    public static ContactDetailFragment newInstance(Serializable serializable) {
+        ContactDetailFragment fragment = new ContactDetailFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARGS_CONTACT, serializable);
+        fragment.setArguments(args);
+        return fragment;
     }
 }
