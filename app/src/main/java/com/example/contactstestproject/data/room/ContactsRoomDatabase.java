@@ -1,13 +1,12 @@
 package com.example.contactstestproject.data.room;
 
-import android.content.Context;
-
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.contactstestproject.data.ContactsDAO;
 import com.example.contactstestproject.model.Contact;
+import com.example.contactstestproject.utils.ApplicationUtils;
 
 @Database(entities = Contact.class, version = 1, exportSchema = false)
 public abstract class ContactsRoomDatabase extends RoomDatabase {
@@ -16,9 +15,9 @@ public abstract class ContactsRoomDatabase extends RoomDatabase {
 
     public abstract ContactsDAO getContactsDAO();
 
-    public static ContactsRoomDatabase getDatabase(Context context) {
+    public static ContactsRoomDatabase getDatabase() {
         return Room.databaseBuilder(
-                context.getApplicationContext(),
+                ApplicationUtils.getContext().getApplicationContext(),
                 ContactsRoomDatabase.class,
                 ContactsRoomDatabase.DATABASE_NAME).build();
     }

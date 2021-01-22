@@ -1,4 +1,4 @@
-package com.example.contactstestproject.utils;
+package com.example.contactstestproject.utils.contacts;
 
 import android.Manifest;
 import android.app.Activity;
@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.example.contactstestproject.utils.ApplicationUtils;
 
 public class ContactPermissionUtils {
 

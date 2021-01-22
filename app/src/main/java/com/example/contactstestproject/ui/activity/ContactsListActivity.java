@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import com.example.contactstestproject.ui.fragment.ContactsListFragment;
-import com.example.contactstestproject.utils.ContactPermissionUtils;
+import com.example.contactstestproject.utils.contacts.ContactPermissionUtils;
 
 public class ContactsListActivity extends SingleFragmentActivity {
 

@@ -1,14 +1,13 @@
 package com.example.contactstestproject.data.repository;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.contactstestproject.data.ContactsDAO;
 import com.example.contactstestproject.data.room.ContactsRoomDatabase;
 import com.example.contactstestproject.model.Contact;
 import com.example.contactstestproject.utils.ApplicationUtils;
-import com.example.contactstestproject.utils.ContactSyncUtils;
 import com.example.contactstestproject.utils.ThreadUtils;
+import com.example.contactstestproject.utils.contacts.ContactSyncUtils;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class ContactsRepository implements IContactsRepository {
 
     private ContactsRepository() {
         ContactsRoomDatabase contactsRoomDatabase = ContactsRoomDatabase.
-                getDatabase(ApplicationUtils.getContext());
+                getDatabase();
         mContactsDAO = contactsRoomDatabase.getContactsDAO();
         mContactSyncUtils = new ContactSyncUtils(ApplicationUtils.getContext());
     }
@@ -34,22 +33,6 @@ public class ContactsRepository implements IContactsRepository {
     @Override
     public LiveData<List<Contact>> getContactsLiveData() {
         return mContactsDAO.getList();
-    }
-
-    @Override
-    public LiveData<Contact> getContactLiveData(final String id) {
-        final MutableLiveData<Contact> liveData = new MutableLiveData<>();
-
-        ThreadUtils.dataBaseWriteExecutor.execute(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        Contact contact = mContactsDAO.getContact(id);
-                        liveData.postValue(contact);
-                    }
-                }
-        );
-        return liveData;
     }
 
     @Override

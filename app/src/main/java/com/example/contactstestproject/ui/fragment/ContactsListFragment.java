@@ -28,7 +28,8 @@ public class ContactsListFragment extends Fragment {
     private ContactsListAdapter mContactsListAdapter;
     private ContactsListViewModel mContactsListViewModel;
 
-    public ContactsListFragment() {}
+    public ContactsListFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,23 +53,14 @@ public class ContactsListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mFragmentContactsListBinding.progressBar.setVisibility(View.VISIBLE);
         mContactsListViewModel.insertContacts();
         mContactsListViewModel.getContactsLiveData().observe(this, new Observer<List<Contact>>() {
             @Override
             public void onChanged(List<Contact> contacts) {
                 setAdapter(contacts);
-                mFragmentContactsListBinding.progressBar.setVisibility(View.INVISIBLE);
             }
         });
         mFragmentContactsListBinding.ContactsList.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mFragmentContactsListBinding.progressBar.setVisibility(View.VISIBLE);
-        mContactsListViewModel.insertContacts();
     }
 
     private void setAdapter(List<Contact> contacts) {

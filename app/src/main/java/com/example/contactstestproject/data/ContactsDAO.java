@@ -14,7 +14,7 @@ import java.util.List;
 public interface ContactsDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertContacts (Contact... contacts);
+    void insertContacts(Contact... contacts);
 
     @Query("delete from contacts")
     void clear();
@@ -22,6 +22,4 @@ public interface ContactsDAO {
     @Query("select * from contacts")
     LiveData<List<Contact>> getList();
 
-    @Query("select * from contacts where id = :id")
-    Contact getContact(String id);
 }

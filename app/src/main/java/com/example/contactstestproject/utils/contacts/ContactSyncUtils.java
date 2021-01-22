@@ -1,4 +1,4 @@
-package com.example.contactstestproject.utils;
+package com.example.contactstestproject.utils.contacts;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -26,6 +26,7 @@ public class ContactSyncUtils {
     }
 
     public void sync() {
+        mContacts.clear();
         if (ContactPermissionUtils.isGranted()) {
             ContentResolver contentResolver = mContext.getContentResolver();
             Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,

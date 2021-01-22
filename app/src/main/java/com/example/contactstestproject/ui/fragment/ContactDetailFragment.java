@@ -22,15 +22,18 @@ import com.example.contactstestproject.model.Contact;
 import com.example.contactstestproject.viewmodel.ContactDetailViewModel;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class ContactDetailFragment extends Fragment {
 
     private ContactDetailViewModel mContactDetailViewModel;
     private FragmentContactDetailBinding mFragmentContactViewBinding;
+    private Contact mContact;
     public static final String ARGS_CONTACT = "ARGS_CONTACT";
 
-    public ContactDetailFragment() {}
+    public ContactDetailFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,21 +58,15 @@ public class ContactDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Contact contact = (Contact) getArguments().getSerializable(ARGS_CONTACT);
-        initData(contact);
-        mContactDetailViewModel.getContactLiveData(contact.getId()).observe(this, new Observer<Contact>() {
+        mContact = (Contact) (getArguments() != null ? getArguments().getSerializable(ARGS_CONTACT) : null);
+        initData(mContact);
+        mContactDetailViewModel.getContactsLiveData().observe(this, new Observer<List<Contact>>() {
             @Override
-            public void onChanged(Contact contact) {
-                initData(contact);
+            public void onChanged(List<Contact> contacts) {
+                initData(mContactDetailViewModel.getContactNewInfo(contacts, mContact));
             }
         });
         setHasOptionsMenu(true);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mContactDetailViewModel.insertContacts();
     }
 
     @Override
@@ -80,17 +77,22 @@ public class ContactDetailFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menu_item_back) {
-            getActivity().onBackPressed();
+            Objects.requireNonNull(getActivity()).onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void initData(Contact contact) {
-        mFragmentContactViewBinding.name.setText(contact.getName());
-        mFragmentContactViewBinding.number
-                .setText(String.format(getString(R.string.number_contact_detail),
-                        contact.getPhoneNumber()));
+        if (contact != null) {
+            mFragmentContactViewBinding.name.setText(contact.getName());
+            mFragmentContactViewBinding.number
+                    .setText(String.format(getString(R.string.number_contact_detail),
+                            contact.getPhoneNumber()));
+        } else {
+            mFragmentContactViewBinding.name.setText(R.string.no_contact);
+            mFragmentContactViewBinding.number.setText("");
+        }
     }
 
     public static ContactDetailFragment newInstance(Serializable serializable) {
