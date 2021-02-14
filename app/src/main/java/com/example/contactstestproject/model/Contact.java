@@ -1,24 +1,16 @@
 package com.example.contactstestproject.model;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity(tableName = "contacts")
+
 public class Contact implements Serializable {
 
-    @PrimaryKey
-    @NonNull
-    @ColumnInfo(name = "id")
     private String mId;
 
-    @ColumnInfo(name = "name")
     private String mName;
 
-    @ColumnInfo(name = "phone-number")
     private String mPhoneNumber;
 
     public String getId() {

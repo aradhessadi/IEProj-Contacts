@@ -15,5 +15,6 @@ public class MyApp extends Application {
         ApplicationUtils.setContext(getApplicationContext());
         mContactsObserver = new ContactsObserver();
         mContactsObserver.setData();
+
     }
 }

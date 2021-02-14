@@ -8,7 +8,7 @@ import com.example.contactstestproject.utils.ApplicationUtils;
 
 public class ContactsObserver {
 
-    ContactsRepository mRepository = ContactsRepository.getInstance();
+   ContactsRepository mRepository = ContactsRepository.getInstance();
 
 
     public ContentObserver mContentObserver = new ContentObserver(null) {
